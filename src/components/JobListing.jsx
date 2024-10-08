@@ -6,10 +6,9 @@ const JobListing = ({ job }) => {
   const [showFullDesc, setShowFullDesc] = useState(false);
 
   let description = job.description;
-  if (!showFullDesc) {
+  if (!showFullDesc && description.length > 89) {
     description = job.description.substring(0, 90) + "...";
   }
-
   return (
     <div className="bg-white rounded-xl shadow-md relative">
       <div className="p-4">
@@ -24,7 +23,7 @@ const JobListing = ({ job }) => {
           className="text-indigo-500 mb-5 hover:text-indigo-600"
           onClick={() => setShowFullDesc((prevState) => !prevState)}
         >
-          {showFullDesc ? "Less" : "More"}
+          {description.length > 89 ? (showFullDesc ? "Less" : "More") : ""}
         </button>
 
         <h3 className="text-indigo-500 mb-2">{job.salary}</h3>
